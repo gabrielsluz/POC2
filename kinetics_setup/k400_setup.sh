@@ -3,7 +3,7 @@ FOLDER_PATH="/datasets"
 #Download csv files
 apt-get install wget
 wget -P $FOLDER_PATH https://storage.googleapis.com/deepmind-media/Datasets/kinetics400.tar.gz
-tar -zxvf $FOLDER_PATH/kinetics400.tar.gz
+tar -zxvf $FOLDER_PATH/kinetics400.tar.gz -C $FOLDER_PATH
 
 #Extract first lines and replace spaces for underlines
 python3 extract_csv_header.py $FOLDER_PATH/kinetics400/train.csv 20
@@ -15,6 +15,8 @@ mkdir $FOLDER_PATH/kinetics
 git clone https://github.com/gabrielsluz/kinetics-downloader.git
 cd kinetics-downloader
 python3 -m pip install -r requirements.txt
+python3 -m pip install pandas==1.1.5
+apt -y install ffmpeg
 python3 download.py $FOLDER_PATH/kinetics400/trainhead.csv $FOLDER_PATH/kinetics --trim
 python3 download.py $FOLDER_PATH/kinetics400/validatehead.csv $FOLDER_PATH/kinetics --trim
 python3 download.py $FOLDER_PATH/kinetics400/testhead.csv $FOLDER_PATH/kinetics --trim
