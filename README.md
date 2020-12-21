@@ -18,7 +18,7 @@ python3 setup.py build develop
 SlowFast should be working now.
 
 ### How to setup the Kinetics dataset
-The k400_setup.sh script does it all.
+The kinetics_setup does it all.
 The script install some packages, therefore it is advisable to use inside the
 singularity machine: 
 

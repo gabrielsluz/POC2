@@ -1,5 +1,6 @@
 import subprocess
 import os
+import sys
 
 #Modified from: https://github.com/facebookresearch/video-nonlocal-net/blob/master/process_data/kinetics/downscale_video_joblib.py
 def downscale_clip(video_path):
@@ -67,8 +68,12 @@ def prepare_dataset(dataset_path, csv_file, out_file, label_dict):
   input_file.close()
   output_file.close()
 
-file_list = ['kinetics400/trainhead.csv', 'kinetics400/validatehead.csv', 'kinetics400/testhead.csv']
-label_dict = gen_label_file(file_list, 'kinetics/labels.csv')
-prepare_dataset('kinetics', 'kinetics400/trainhead.csv', 'kinetics/train.csv', label_dict)
-prepare_dataset('kinetics', 'kinetics400/validatehead.csv', 'kinetics/val.csv', label_dict)
-prepare_dataset('kinetics', 'kinetics400/testhead.csv', 'kinetics/test.csv', label_dict)
+base_path = sys.argv[1]
+out_path = base_path + '/kinetics'
+in_path = base_path + "/kinetics400"
+
+file_list = [in_path+'/trainhead.csv', in_path+'/validatehead.csv', in_path+'/testhead.csv']
+label_dict = gen_label_file(file_list, out_path+'/labels.csv')
+prepare_dataset(out_path, in_path+'/trainhead.csv', out_path+'/train.csv', label_dict)
+prepare_dataset(out_path, in_path+'/validatehead.csv', out_path+'/val.csv', label_dict)
+prepare_dataset(out_path, in_path+'/testhead.csv', out_path+'/test.csv', label_dict)
