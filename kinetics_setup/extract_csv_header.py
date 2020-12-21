@@ -20,5 +20,5 @@ def extract_header(filename, num_lines):
 
 
 filename = sys.argv[1]
-num_lines = sys.argv[2]
+num_lines = int(sys.argv[2])
 extract_header(filename, num_lines)
