@@ -24,5 +24,5 @@ singularity machine:
 
 sudo singularity shell -B shared_dir:/datasets train_sf/
 git clone https://github.com/gabrielsluz/POC2.git
-chmod +x /POC2/
-
+chmod +x POC2/kinetics_setup/k400_setup.sh
+./POC2/kinetics_setup/k400_setup.sh
