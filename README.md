@@ -8,6 +8,7 @@ git clone https://github.com/gabrielsluz/POC2.git
 mkdir train_sf
 cd train_sf
 sudo singularity build --sandbox train_sf ../POC2/Singularity
+chmod +x POC2/packages_setup.sh
 
 sudo singularity shell --writable train_sf
 
