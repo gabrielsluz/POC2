@@ -2,6 +2,7 @@
 Use a Singularity Container :)
 Building the container:
 - In the machine which has singularity,
+- Intalling all through the Singularity file was running out of memory, so it needs to installled in the sandbox mode
 
 git clone https://github.com/gabrielsluz/POC2.git
 mkdir train_sf
