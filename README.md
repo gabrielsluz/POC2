@@ -11,7 +11,7 @@ sudo singularity build --sandbox train_sf ../POC2/Singularity
 sudo singularity shell --writable train_sf
 
 git clone https://github.com/gabrielsluz/SlowFast.git
-export PYTHONPATH=/content/SlowFast:$PYTHONPATH
+export PYTHONPATH=/content/slowfast:$PYTHONPATH
 cd SlowFast
 python3 setup.py build develop
 

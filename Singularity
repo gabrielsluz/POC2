@@ -26,6 +26,7 @@ From: nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
     python3 -m pip install opencv-python
     python3 -m pip install tensorboard
     python3 -m pip install moviepy
+    python3 -m pip install matplotlib
 
     python3 -m pip install -U cython
     apt-get -y install python3-dev
