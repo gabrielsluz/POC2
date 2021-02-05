@@ -11,9 +11,10 @@ sudo singularity build --sandbox train_sf ../POC2/Singularity
 chmod +x POC2/packages_setup.sh
 
 sudo singularity shell --writable train_sf
+./POC2/packages_setup.sh 
 
 git clone https://github.com/gabrielsluz/SlowFast.git
-export PYTHONPATH=/content/slowfast:$PYTHONPATH
+export PYTHONPATH=/SlowFast/slowfast:$PYTHONPATH
 cd SlowFast
 python3 setup.py build develop
 
@@ -32,8 +33,35 @@ cd POC2/kinetics_setup
 
 
 ### Test the installation:
+sudo singularity shell -B shared_dir:/datasets train_sf/
+
+cd SlowFast
+
 python3 tools/run_net.py \
   --cfg configs/Kinetics/C2D_8x8_R50.yaml \
   DATA.PATH_TO_DATA_DIR /datasets/kinetics/ \
   NUM_GPUS 0 \
-  TRAIN.BATCH_SIZE 8
+  TRAIN.BATCH_SIZE 2 \
+  SOLVER.MAX_EPOCH 1
+
+Linear model:
+
+rm ./checkpoints/checkpoint_epoch_00001.pyth #Remove checkpoint
+
+python3 tools/run_net.py \
+  --cfg configs/demo/linear.yaml \
+  DATA.PATH_TO_DATA_DIR /datasets/kinetics/ \
+  NUM_GPUS 0 \
+  TRAIN.BATCH_SIZE 2 \
+  SOLVER.MAX_EPOCH 1
+
+  ### Run on MONet on Clevrer Frames
+
+python3 clevrer_dev/test_dataset.py \
+  --cfg clevrer_dev/clevrer_frame.yaml \
+  DATA.PATH_TO_DATA_DIR /datasets/clevrer_dummy \
+  DATA.PATH_PREFIX /datasets/clevrer_dummy \
+  NUM_GPUS 0 \
+  TRAIN.BATCH_SIZE 3 \
+  SOLVER.MAX_EPOCH 1
+
