@@ -55,7 +55,7 @@ python3 tools/run_net.py \
   TRAIN.BATCH_SIZE 2 \
   SOLVER.MAX_EPOCH 1
 
-  ### Run on MONet on Clevrer Frames
+### Test Clevrer Frames dataset
 
 python3 clevrer_dev/test_dataset.py \
   --cfg clevrer_dev/clevrer_frame.yaml \
@@ -65,3 +65,11 @@ python3 clevrer_dev/test_dataset.py \
   TRAIN.BATCH_SIZE 3 \
   SOLVER.MAX_EPOCH 1
 
+### Run on MONet on Clevrer Frames
+python3 clevrer_dev/monet/run_net.py \
+  --cfg clevrer_dev/monet/monet.yaml \
+  DATA.PATH_TO_DATA_DIR /datasets/clevrer_dummy \
+  DATA.PATH_PREFIX /datasets/clevrer_dummy \
+  NUM_GPUS 0 \
+  TRAIN.BATCH_SIZE 3 \
+  SOLVER.MAX_EPOCH 1
