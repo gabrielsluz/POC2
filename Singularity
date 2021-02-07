@@ -14,7 +14,6 @@ From: nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
     apt-get update -y
     apt-get install -y git
 
-    python3 -m pip install torchvision==0.5.0
-    python3 -m pip install torch==1.4.0
+    python3 -m pip install torch==1.6.0+cu101 torchvision==0.7.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html
 
     python3 -m pip install setuptools
