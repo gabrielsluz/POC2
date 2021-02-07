@@ -1,4 +1,4 @@
-### How to run this code ?
+## How to run this code ?
 Use a Singularity Container :)
 Building the container:
 - In the machine which has singularity,
@@ -8,19 +8,19 @@ git clone https://github.com/gabrielsluz/POC2.git
 mkdir train_sf
 cd train_sf
 sudo singularity build --sandbox train_sf ../POC2/Singularity
-chmod +x POC2/packages_setup.sh
+chmod +x ../POC2/packages_setup.sh
 
 sudo singularity shell --writable train_sf
 ./POC2/packages_setup.sh 
 
 git clone https://github.com/gabrielsluz/SlowFast.git
-export PYTHONPATH=/SlowFast/slowfast:$PYTHONPATH
+export PYTHONPATH=/home/gabrielsluz/SlowFast/slowfast:$PYTHONPATH
 cd SlowFast
 python3 setup.py build develop
 
 SlowFast should be working now.
 
-### How to setup the Kinetics dataset
+## How to setup the Kinetics dataset
 The kinetics_setup does it all.
 The script install some packages, therefore it is advisable to use inside the
 singularity machine: 
@@ -32,7 +32,7 @@ cd POC2/kinetics_setup
 ./k400_setup.sh
 
 
-### Test the installation:
+## Test the installation:
 sudo singularity shell -B shared_dir:/datasets train_sf/
 
 cd SlowFast
@@ -68,8 +68,45 @@ python3 clevrer_dev/test_dataset.py \
 ### Run on MONet on Clevrer Frames
 python3 clevrer_dev/monet/run_net.py \
   --cfg clevrer_dev/monet/monet.yaml \
-  DATA.PATH_TO_DATA_DIR /datasets/clevrer_dummy \
-  DATA.PATH_PREFIX /datasets/clevrer_dummy \
-  NUM_GPUS 0 \
+  DATA.PATH_TO_DATA_DIR /datasets/clevrer \
+  DATA.PATH_PREFIX /datasets/clevrer \
+  NUM_GPUS 1 \
   TRAIN.BATCH_SIZE 3 \
   SOLVER.MAX_EPOCH 1
+
+
+## Training
+
+### Training on server
+
+singularity shell -B /srv/storage/datasets/gabrielsluz/:/datasets/ --nv /srv/storage/singularity/forge/gabrielsluz/train_sf/train_sf
+ulimit -v <value>
+
+### Train MONet on Clevrer Frames
+
+
+### Errors on the server
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+detectron2 0.3 requires pycocotools>=2.0.2, but you have pycocotools 2.0 which is incompatible.
+*Ignored
+
+NVIDIA CUDA:
+
+UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 9010). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at  /pytorch/c10/cuda/CUDAFunctions.cpp:100.)
+
+nvcc --version
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2019 NVIDIA Corporation
+Built on Sun_Jul_28_19:07:16_PDT_2019
+Cuda compilation tools, release 10.1, V10.1.243
+Singularity train_sf:~/SlowFast> 
+
+https://docs.nvidia.com/deploy/cuda-compatibility/index.html
+
+Driver of the GPU is too old for CUDA
+Needs CUDA 9.0 (9.0.76) at max
+However, POC1 used the same cuda: Bootstrap: docker
+From: nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
+Maybe it is proc2 GPU that is outdated
+
+It is a pytorch version problem => let's downgrade it
