@@ -2,8 +2,21 @@
 Use a Singularity Container :)
 Building the container:
 - In the machine which has singularity,
-- Intalling all through the Singularity file was running out of memory, so it needs to installled in the sandbox mode
+- Intalling all through the Singularity file was running out of memory, so it needs to installled in the sandbox mode. However, if enough memory is available use: 
 
+- Plenty of memory:
+git clone https://github.com/gabrielsluz/POC2.git
+mkdir train_sf
+cd train_sf
+sudo singularity build --sandbox -F train_sf ../POC2/FullSingularity
+
+sudo singularity shell --writable train_sf
+git clone https://github.com/gabrielsluz/SlowFast.git
+export PYTHONPATH=/home/gabrielsluz/SlowFast/slowfast:$PYTHONPATH
+cd SlowFast
+python3 setup.py build develop
+
+- Low memory:
 git clone https://github.com/gabrielsluz/POC2.git
 mkdir train_sf
 cd train_sf
@@ -82,7 +95,42 @@ python3 clevrer_dev/monet/run_net.py \
 singularity shell -B /srv/storage/datasets/gabrielsluz/:/datasets/ --nv /srv/storage/singularity/forge/gabrielsluz/train_sf/train_sf
 ulimit -v <value>
 
+Temporary: 
+export PYTHONPATH=/home/gabrielsluz/SlowFast/slowfast:$PYTHONPATH
+cd /usr/local/lib/python3.6/dist-packages/
+find . -type f -name "*.pyc"
+find . -name "*.pyc" -type f -delete
+
+
 ### Train MONet on Clevrer Frames
+
+python3 clevrer_dev/monet/run_net.py \
+  --cfg clevrer_dev/monet/monet.yaml \
+  DATA.PATH_TO_DATA_DIR /datasets/clevrer \
+  DATA.PATH_PREFIX /datasets/clevrer \
+  NUM_GPUS 1 \
+  LOG_PERIOD 50 \
+  TRAIN.BATCH_SIZE 32 \
+  TRAIN.EVAL_PERIOD 20 \
+  TRAIN.CHECKPOINT_PERIOD 20 \
+  TRAIN.CHECKPOINT_FILE_PATH ./monet_checkpoints/checkpoint_epoch_00140.pyth \
+  SOLVER.MAX_EPOCH 200
+
+
+
+### Train Clevrer 
+
+python3 clevrer_dev/clevrer/run_net.py \
+  --cfg clevrer_dev/clevrer/clevrer.yaml \
+  DATA.PATH_TO_DATA_DIR /datasets/clevrer_dummy \
+  DATA.PATH_PREFIX /datasets/clevrer_dummy \
+  MONET.CHECKPOINT_LOAD /datasets/checkpoint_epoch_00020.pyth \
+  NUM_GPUS 0 \
+  LOG_PERIOD 1 \
+  TRAIN.BATCH_SIZE 4 \
+  TRAIN.EVAL_PERIOD 1 \
+  TRAIN.CHECKPOINT_PERIOD 1 \
+  SOLVER.MAX_EPOCH 1
 
 
 ### Errors on the server
