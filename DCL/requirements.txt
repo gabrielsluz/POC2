@@ -1,0 +1,14 @@
+six
+pyyaml
+tqdm
+pyzmq
+h5py
+numpy
+scipy
+sklearn
+matplotlib
+lmdb
+tabulate
+ipdb
+visdom
+sklearn
