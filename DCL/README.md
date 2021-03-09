@@ -1,14 +1,16 @@
+#Radical change of plans => use DCL now
+
 ## How to run this code ?
 Use a Singularity Container :)
 Building the container:
-- In the machine which has singularity,
+- In the machine that has singularity,
 - Installing all through the Singularity file was running out of memory, so it needs to installled in the sandbox mode. However, if enough memory is available use: 
 
 - Plenty of memory:
 git clone https://github.com/gabrielsluz/POC2.git
-mkdir train_sf
-cd train_sf
-sudo singularity build --sandbox -F train_sf ../POC2/FullSingularity
+mkdir dcl
+cd dcl
+sudo singularity build --sandbox -F train_dcl ../POC2/DCL/Singularity
 
 sudo singularity shell --writable train_sf
 git clone https://github.com/gabrielsluz/SlowFast.git
