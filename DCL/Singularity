@@ -16,3 +16,23 @@ From: nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
     python3 -m pip install setuptools
 
     python3 -m pip install torch==1.6.0+cu101 torchvision==0.7.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html
+
+    python3 -m pip install pycocotools
+    python3 -m pip install opencv-python
+    apt -y install libgl1-mesa-glx
+    apt-get -y install libglib2.0-0
+    python3 -m pip install filterpy
+    python3 -m pip install six
+    python3 -m pip install pyyaml
+    python3 -m pip install tqdm
+    python3 -m pip install pyzmq
+    python3 -m pip install h5py
+    python3 -m pip install numpy
+    python3 -m pip install scipy
+    python3 -m pip install sklearn
+    python3 -m pip install matplotlib
+    python3 -m pip install lmdb
+    python3 -m pip install tabulate
+    python3 -m pip install ipdb
+    python3 -m pip install visdom
+    python3 -m pip install sklearn
