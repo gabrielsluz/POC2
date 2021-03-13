@@ -36,3 +36,6 @@ From: nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
     python3 -m pip install ipdb
     python3 -m pip install visdom
     python3 -m pip install sklearn
+    python3 -m pip install cython
+
+    apt install -y ffmpeg

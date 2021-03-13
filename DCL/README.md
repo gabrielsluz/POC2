@@ -24,7 +24,7 @@ git clone https://github.com/zfchenUnique/DCL-Release-Private.git --recursive
 singularity shell -B /srv/storage/datasets/gabrielsluz/:/datasets/ --nv /srv/storage/singularity/forge/gabrielsluz/dcl/train_dcl
 git clone https://github.com/vacancy/Jacinle --recursive
 export PATH=/home/gabrielsluz/Jacinle/bin:$PATH
-git clone https://github.com/zfchenUnique/DCL-Release-Private.git --recursive
+git clone https://github.com/gabrielsluz/DCL-Release.git --recursive
 
 
 ## Test the installation:
@@ -45,3 +45,9 @@ python3 scripts/script_gen_tube_proposals.py \
     --visualize_flag 0 \
     --tube_folder_path ../clevrer/tubeProposalsRelease \
     --use_attr_flag 0 \
+
+
+
+# Reported errors:
+
+- Coco must be sued from Jscinle, and it requires Cython for proper installation
