@@ -14,11 +14,11 @@ From: nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 
     apt-get update -y
     apt-get install -y git
+    python3 -m pip install --trusted-host=pypi.python.org --trusted-host=pypi.org --trusted-host=files.pythonhosted.org  opencv-python
     python3 -m pip install setuptools
 
     python3 -m pip install torch==1.6.0+cu101 torchvision==0.7.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html
 
-    python3 -m pip install opencv-python
     apt -y install libgl1-mesa-glx
     apt-get -y install libglib2.0-0
     python3 -m pip install filterpy
