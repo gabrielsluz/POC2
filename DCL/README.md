@@ -50,4 +50,10 @@ python3 scripts/script_gen_tube_proposals.py \
 
 # Reported errors:
 
-- Coco must be sued from Jscinle, and it requires Cython for proper installation
+- Coco must be sued from Jacinle, and it requires Cython for proper installation
+- Needs ninja
+- Installing in singularity without root goes to: /home/gabrielsluz/.local/bin
+
+Quick and temporary fix for testing only:
+
+export PYTHONPATH=/home/gabrielsluz/.local/bin:$PYTHONPATH

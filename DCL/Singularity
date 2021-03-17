@@ -38,5 +38,6 @@ From: nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
     python3 -m pip install sklearn
     python3 -m pip install cython
     python3 -m pip install ninja
+    python3 -m pip install scikit-image
 
     apt install -y ffmpeg
